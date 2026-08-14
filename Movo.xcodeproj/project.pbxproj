@@ -1,0 +1,451 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		00CB04C5856848376E105ABF /* BracketPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5599A55DCF77EF5DC8FEF5D2 /* BracketPanel.swift */; };
+		06722AB141A1FFF574EC5F01 /* HealthDashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E3C9E126FA20925FEB2192 /* HealthDashboardView.swift */; };
+		0E341B68B5E0503DC82078AB /* WorkoutLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F97B87F8C9BC99FD2C0158C /* WorkoutLogView.swift */; };
+		0EDC7D90744F6FBFCC0D9EBF /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B23C32ADF2A3ADCB06FC4C1 /* RootView.swift */; };
+		4B278F22B52773DA44EBD76A /* SegmentedProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE4C80E72016BDBAB33BBADB /* SegmentedProgressBar.swift */; };
+		5CBB7F229947C2C26161D6DC /* CharacterCreatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470648011D0B565D702D40A1 /* CharacterCreatorView.swift */; };
+		5FAA180FA5C2EEE2315205EC /* Stage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E00793633C836DC8D809039 /* Stage.swift */; };
+		6520B08A5DA179574352C55C /* WorkoutEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C310E5BFA433E2E6BED753A /* WorkoutEntry.swift */; };
+		7D101A7A3882E9B9A1DB07BD /* CharacterShapeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E821116933ADAA5B8E9ADA8 /* CharacterShapeView.swift */; };
+		7DC050453404B4E0C8D7F9C8 /* CharacterHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75BDE2E11AC4FFF27D803723 /* CharacterHomeView.swift */; };
+		7DFE2FF8C853613B6318A520 /* CrewFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2F334A2BE2DD63446025D1 /* CrewFeedView.swift */; };
+		923D937A3EB733D6D94CE5F3 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5F5FDCEB9F7AAE63EE439C /* Theme.swift */; };
+		950772E582AB2A82BFAB16B3 /* AppStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7328776A44DCA79E8E698F /* AppStore.swift */; };
+		AA288EC14511622ADB074EF9 /* HealthSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3AA7E859EECB8B50F6CB1E0 /* HealthSample.swift */; };
+		BD19618DE1AF56D2F7A5CC42 /* MovoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A839D5CE097BD1D777ECC9E /* MovoApp.swift */; };
+		E81910CD46BE3EDE1E3A8E90 /* FeedPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = F204B11CDE208419EBD86B7D /* FeedPost.swift */; };
+		EC89B95F8762A91E4FD25A8D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 41E48B3E8CC1BA671A0537EA /* Assets.xcassets */; };
+		EE8EC60024FBE8C47885E314 /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFB4A660393CCA3B9B5CD73C /* Exercise.swift */; };
+		EFD046E6AC5BC5DC025A8F88 /* CharacterProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101079CBBB83C12C113076FD /* CharacterProfile.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0C310E5BFA433E2E6BED753A /* WorkoutEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutEntry.swift; sourceTree = "<group>"; };
+		0E2F334A2BE2DD63446025D1 /* CrewFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrewFeedView.swift; sourceTree = "<group>"; };
+		101079CBBB83C12C113076FD /* CharacterProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterProfile.swift; sourceTree = "<group>"; };
+		1B23C32ADF2A3ADCB06FC4C1 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		2E00793633C836DC8D809039 /* Stage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stage.swift; sourceTree = "<group>"; };
+		2E821116933ADAA5B8E9ADA8 /* CharacterShapeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterShapeView.swift; sourceTree = "<group>"; };
+		41E48B3E8CC1BA671A0537EA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		470648011D0B565D702D40A1 /* CharacterCreatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterCreatorView.swift; sourceTree = "<group>"; };
+		5599A55DCF77EF5DC8FEF5D2 /* BracketPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BracketPanel.swift; sourceTree = "<group>"; };
+		75BDE2E11AC4FFF27D803723 /* CharacterHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterHomeView.swift; sourceTree = "<group>"; };
+		7A839D5CE097BD1D777ECC9E /* MovoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovoApp.swift; sourceTree = "<group>"; };
+		7DE6A52B52397F257F9EF678 /* Movo.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Movo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		86E3C9E126FA20925FEB2192 /* HealthDashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthDashboardView.swift; sourceTree = "<group>"; };
+		9C7328776A44DCA79E8E698F /* AppStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStore.swift; sourceTree = "<group>"; };
+		9F97B87F8C9BC99FD2C0158C /* WorkoutLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutLogView.swift; sourceTree = "<group>"; };
+		D3AA7E859EECB8B50F6CB1E0 /* HealthSample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthSample.swift; sourceTree = "<group>"; };
+		D6EA8619E4D93CA6A1D2CA11 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		DFB4A660393CCA3B9B5CD73C /* Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
+		EA5F5FDCEB9F7AAE63EE439C /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		EE4C80E72016BDBAB33BBADB /* SegmentedProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedProgressBar.swift; sourceTree = "<group>"; };
+		F204B11CDE208419EBD86B7D /* FeedPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPost.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		028336BF9D7427E2B78C1C92 /* Dashboard */ = {
+			isa = PBXGroup;
+			children = (
+				86E3C9E126FA20925FEB2192 /* HealthDashboardView.swift */,
+			);
+			path = Dashboard;
+			sourceTree = "<group>";
+		};
+		0DE9E7C3ADB5CA414C675C74 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				7A839D5CE097BD1D777ECC9E /* MovoApp.swift */,
+				1B23C32ADF2A3ADCB06FC4C1 /* RootView.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		1BED1C81E4A075B3FA37CE99 /* Feed */ = {
+			isa = PBXGroup;
+			children = (
+				0E2F334A2BE2DD63446025D1 /* CrewFeedView.swift */,
+			);
+			path = Feed;
+			sourceTree = "<group>";
+		};
+		356B5F0120EFF883B0F830E4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7DE6A52B52397F257F9EF678 /* Movo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4937B807AD74B29E185DA7D0 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				5599A55DCF77EF5DC8FEF5D2 /* BracketPanel.swift */,
+				EE4C80E72016BDBAB33BBADB /* SegmentedProgressBar.swift */,
+				EA5F5FDCEB9F7AAE63EE439C /* Theme.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		6B81EC5D8C11FB47E0567064 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				41E48B3E8CC1BA671A0537EA /* Assets.xcassets */,
+				D6EA8619E4D93CA6A1D2CA11 /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		6DD1AF3A8004B387D35715F5 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				9C7328776A44DCA79E8E698F /* AppStore.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		7EA68700C4C23ED0908BEE50 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				91B0E9E700A55B9426F63FF0 /* Character */,
+				028336BF9D7427E2B78C1C92 /* Dashboard */,
+				1BED1C81E4A075B3FA37CE99 /* Feed */,
+				4937B807AD74B29E185DA7D0 /* Shared */,
+				DA4A8C00124D99EEAD6CBAFF /* Workout */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		8D5CE33701E6FBB39A404E37 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				101079CBBB83C12C113076FD /* CharacterProfile.swift */,
+				DFB4A660393CCA3B9B5CD73C /* Exercise.swift */,
+				F204B11CDE208419EBD86B7D /* FeedPost.swift */,
+				D3AA7E859EECB8B50F6CB1E0 /* HealthSample.swift */,
+				2E00793633C836DC8D809039 /* Stage.swift */,
+				0C310E5BFA433E2E6BED753A /* WorkoutEntry.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		91B0E9E700A55B9426F63FF0 /* Character */ = {
+			isa = PBXGroup;
+			children = (
+				470648011D0B565D702D40A1 /* CharacterCreatorView.swift */,
+				75BDE2E11AC4FFF27D803723 /* CharacterHomeView.swift */,
+				2E821116933ADAA5B8E9ADA8 /* CharacterShapeView.swift */,
+			);
+			path = Character;
+			sourceTree = "<group>";
+		};
+		9382CC6D00C82E39FEEACE72 = {
+			isa = PBXGroup;
+			children = (
+				BDF17571DD094FDD501FC59A /* Movo */,
+				356B5F0120EFF883B0F830E4 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		BDF17571DD094FDD501FC59A /* Movo */ = {
+			isa = PBXGroup;
+			children = (
+				0DE9E7C3ADB5CA414C675C74 /* App */,
+				8D5CE33701E6FBB39A404E37 /* Models */,
+				6B81EC5D8C11FB47E0567064 /* Resources */,
+				6DD1AF3A8004B387D35715F5 /* ViewModels */,
+				7EA68700C4C23ED0908BEE50 /* Views */,
+			);
+			path = Movo;
+			sourceTree = "<group>";
+		};
+		DA4A8C00124D99EEAD6CBAFF /* Workout */ = {
+			isa = PBXGroup;
+			children = (
+				9F97B87F8C9BC99FD2C0158C /* WorkoutLogView.swift */,
+			);
+			path = Workout;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		96E6209094BF90D7FCB493A9 /* Movo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 79FE3DD1767269CA6D7CC817 /* Build configuration list for PBXNativeTarget "Movo" */;
+			buildPhases = (
+				C163D81A41EF458511038C35 /* Sources */,
+				210BBAB8C914C653A2C55DF7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Movo;
+			packageProductDependencies = (
+			);
+			productName = Movo;
+			productReference = 7DE6A52B52397F257F9EF678 /* Movo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A85B36AA4B355258F1A2555D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+				};
+			};
+			buildConfigurationList = 0B915E60610185960BFF22CF /* Build configuration list for PBXProject "Movo" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 9382CC6D00C82E39FEEACE72;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 356B5F0120EFF883B0F830E4 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				96E6209094BF90D7FCB493A9 /* Movo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		210BBAB8C914C653A2C55DF7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EC89B95F8762A91E4FD25A8D /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C163D81A41EF458511038C35 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				950772E582AB2A82BFAB16B3 /* AppStore.swift in Sources */,
+				00CB04C5856848376E105ABF /* BracketPanel.swift in Sources */,
+				5CBB7F229947C2C26161D6DC /* CharacterCreatorView.swift in Sources */,
+				7DC050453404B4E0C8D7F9C8 /* CharacterHomeView.swift in Sources */,
+				EFD046E6AC5BC5DC025A8F88 /* CharacterProfile.swift in Sources */,
+				7D101A7A3882E9B9A1DB07BD /* CharacterShapeView.swift in Sources */,
+				7DFE2FF8C853613B6318A520 /* CrewFeedView.swift in Sources */,
+				EE8EC60024FBE8C47885E314 /* Exercise.swift in Sources */,
+				E81910CD46BE3EDE1E3A8E90 /* FeedPost.swift in Sources */,
+				06722AB141A1FFF574EC5F01 /* HealthDashboardView.swift in Sources */,
+				AA288EC14511622ADB074EF9 /* HealthSample.swift in Sources */,
+				BD19618DE1AF56D2F7A5CC42 /* MovoApp.swift in Sources */,
+				0EDC7D90744F6FBFCC0D9EBF /* RootView.swift in Sources */,
+				4B278F22B52773DA44EBD76A /* SegmentedProgressBar.swift in Sources */,
+				5FAA180FA5C2EEE2315205EC /* Stage.swift in Sources */,
+				923D937A3EB733D6D94CE5F3 /* Theme.swift in Sources */,
+				6520B08A5DA179574352C55C /* WorkoutEntry.swift in Sources */,
+				0E341B68B5E0503DC82078AB /* WorkoutLogView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		3EF980C19FB062F2DC2C55B9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		79BF01E56EBAC8B1BCA885A3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_ASSET_PATHS = "";
+				INFOPLIST_FILE = Movo/Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.movo.app;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		E39298706592E2027333CD5C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_ASSET_PATHS = "";
+				INFOPLIST_FILE = Movo/Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.movo.app;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		F1A9F496062757B73A7767AE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0B915E60610185960BFF22CF /* Build configuration list for PBXProject "Movo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F1A9F496062757B73A7767AE /* Debug */,
+				3EF980C19FB062F2DC2C55B9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		79FE3DD1767269CA6D7CC817 /* Build configuration list for PBXNativeTarget "Movo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				79BF01E56EBAC8B1BCA885A3 /* Debug */,
+				E39298706592E2027333CD5C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A85B36AA4B355258F1A2555D /* Project object */;
+}
