@@ -1,91 +1,122 @@
 import SwiftUI
 
 struct HealthDashboardView: View {
+    @EnvironmentObject var store: AppStore
+    @Environment(\.colorScheme) private var scheme
     private let snapshot = HealthSnapshot.mock
 
     var body: some View {
         ZStack {
-            Color.movoBackground.ignoresSafeArea()
+            scheme.movoBackground.ignoresSafeArea()
 
             ScrollView {
-                VStack(spacing: 20) {
-                    Text("HEALTH HUD")
-                        .font(.movoHeader(30))
-                        .foregroundStyle(Color.movoTextPrimary)
+                VStack(spacing: 16) {
+                    Text("Health")
+                        .font(.movoDisplay(28))
+                        .foregroundStyle(scheme.movoTextPrimary)
                         .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding(.horizontal, 20)
-                        .padding(.top, 24)
+                        .padding(.top, 16)
 
-                    VStack(spacing: 14) {
-                        StatPanel(
-                            icon: "heart.fill",
-                            accent: .movoCoral,
-                            label: "RESTING HEART RATE",
-                            value: "\(snapshot.restingHeartRate)",
-                            unit: "BPM"
-                        )
-                        StatPanel(
-                            icon: "bed.double.fill",
-                            accent: .movoSteel,
-                            label: "SLEEP",
-                            value: String(format: "%.1f", snapshot.sleepHours),
-                            unit: "HRS"
-                        )
-                        StatPanel(
-                            icon: "iphone",
-                            accent: .movoVolt,
-                            label: "SCREEN TIME",
-                            value: String(format: "%.1f", snapshot.screenTimeHours),
-                            unit: "HRS"
-                        )
-                    }
-                    .padding(.horizontal, 20)
+                    MovoBanner(icon: "heart.text.square", text: "Sample data. Connects to Apple Health / Google Fit in the full version.", tint: .movoAmber)
 
-                    BracketPanel {
-                        HStack(spacing: 10) {
-                            Image(systemName: "applewatch")
-                                .foregroundStyle(Color.movoTextSecondary)
-                            Text("Sample data for the pitch — connects to Apple Health / wearables in the full version.")
-                                .font(.movoMono(11))
-                                .foregroundStyle(Color.movoTextSecondary)
-                        }
+                    LazyVGrid(columns: [GridItem(.flexible(), spacing: 12), GridItem(.flexible(), spacing: 12)], spacing: 12) {
+                        heartRateCard
+                        sleepCard
+                        screenTimeCard
+                        waterCard
                     }
-                    .padding(.horizontal, 20)
-                    .padding(.bottom, 32)
+
+                    weeklyCheckIn
+                }
+                .padding(.horizontal, MovoMetrics.screenPadding)
+                .padding(.bottom, 32)
+            }
+        }
+    }
+
+    private var heartRateCard: some View {
+        RoundedCard {
+            SectionHeading(title: "Heart rate")
+            HStack(alignment: .lastTextBaseline, spacing: 4) {
+                Text("\(snapshot.restingHeartRate)")
+                    .font(.movoDisplay(26))
+                    .foregroundStyle(Color.movoAmber)
+                Text("bpm")
+                    .font(.movoBody(11))
+                    .foregroundStyle(scheme.movoTextSecondary)
+            }
+            HStack(alignment: .bottom, spacing: 4) {
+                ForEach(Array(snapshot.heartRateSamples.enumerated()), id: \.offset) { _, v in
+                    RoundedRectangle(cornerRadius: 2)
+                        .fill(Color.movoAmber.opacity(Double(v) / 100.0 + 0.3))
+                        .frame(width: 8, height: CGFloat(v) * 0.5)
+                }
+            }
+            .frame(height: 30, alignment: .bottom)
+        }
+    }
+
+    private var sleepCard: some View {
+        RoundedCard {
+            SectionHeading(title: "Sleep")
+            Text(snapshot.sleepLabel)
+                .font(.movoDisplay(26))
+                .foregroundStyle(Color.movoBlue)
+            HStack(spacing: 3) {
+                Capsule().fill(Color.movoBlue.opacity(0.4)).frame(width: 34, height: 8)
+                Capsule().fill(Color.movoBlue).frame(width: 46, height: 8)
+                Capsule().fill(Color.movoBlue.opacity(0.6)).frame(width: 20, height: 8)
+            }
+            Text("Deep \(String(format: "%.0fh%02d", snapshot.deepSleepHours, Int((snapshot.deepSleepHours.truncatingRemainder(dividingBy: 1)) * 60))) · REM \(String(format: "%.0fh%02d", snapshot.remSleepHours, Int((snapshot.remSleepHours.truncatingRemainder(dividingBy: 1)) * 60)))")
+                .font(.movoBody(10))
+                .foregroundStyle(scheme.movoTextSecondary)
+        }
+    }
+
+    private var screenTimeCard: some View {
+        RoundedCard {
+            SectionHeading(title: "Screen time")
+            Text(snapshot.screenTimeLabel)
+                .font(.movoDisplay(26))
+                .foregroundStyle(Color.movoPink)
+            Text("\(snapshot.screenTimeDeltaMinutes) min vs last week")
+                .font(.movoBody(10))
+                .foregroundStyle(scheme.movoTextSecondary)
+        }
+    }
+
+    private var waterCard: some View {
+        RoundedCard {
+            SectionHeading(title: "Water")
+            HStack(alignment: .lastTextBaseline, spacing: 4) {
+                Text("\(snapshot.waterGlasses)")
+                    .font(.movoDisplay(26))
+                    .foregroundStyle(Color.movoBlue)
+                Text("/ \(snapshot.waterGoal)")
+                    .font(.movoBody(12))
+                    .foregroundStyle(scheme.movoTextSecondary)
+            }
+            HStack(spacing: 4) {
+                ForEach(0..<snapshot.waterGoal, id: \.self) { i in
+                    Image(systemName: "drop.fill")
+                        .font(.system(size: 12))
+                        .foregroundStyle(i < snapshot.waterGlasses ? Color.movoBlue : scheme.movoSurfaceAlt)
                 }
             }
         }
     }
-}
 
-private struct StatPanel: View {
-    var icon: String
-    var accent: Color
-    var label: String
-    var value: String
-    var unit: String
-
-    var body: some View {
-        BracketPanel(accent: accent) {
-            HStack(spacing: 16) {
-                Image(systemName: icon)
-                    .font(.system(size: 26))
-                    .foregroundStyle(accent)
-                    .frame(width: 36)
-
-                Text(label)
-                    .font(.movoMono(12, weight: .semibold))
-                    .foregroundStyle(Color.movoTextSecondary)
-
-                Spacer()
-
-                HStack(alignment: .firstTextBaseline, spacing: 4) {
-                    Text(value)
-                        .font(.movoMono(26, weight: .bold))
-                        .foregroundStyle(Color.movoTextPrimary)
-                    Text(unit)
-                        .font(.movoMono(12, weight: .semibold))
-                        .foregroundStyle(Color.movoTextSecondary)
+    private var weeklyCheckIn: some View {
+        RoundedCard {
+            HStack(alignment: .top, spacing: 14) {
+                CharacterPortrait(accent: store.character.accent.color, stage: store.character.stage, mood: store.mood, gear: store.character.gear(), targetHeight: 64)
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("Weekly check-in")
+                        .font(.movoBody(14, weight: .bold))
+                        .foregroundStyle(scheme.movoTextPrimary)
+                    Text("\(store.weeklySessionsCount) workout\(store.weeklySessionsCount == 1 ? "" : "s"), \(store.character.pointsToNextStage) pts to \(store.character.stage.next?.displayName ?? "Champion"). Sleep is your weak spot.")
+                        .font(.movoBody(12))
+                        .foregroundStyle(scheme.movoTextSecondary)
                 }
             }
         }
@@ -93,5 +124,5 @@ private struct StatPanel: View {
 }
 
 #Preview {
-    HealthDashboardView()
+    HealthDashboardView().environmentObject(AppStore())
 }

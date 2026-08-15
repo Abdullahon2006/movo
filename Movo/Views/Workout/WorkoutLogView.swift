@@ -2,122 +2,185 @@ import SwiftUI
 
 struct WorkoutLogView: View {
     @EnvironmentObject var store: AppStore
-    @State private var amounts: [Exercise: Int] = [:]
-    @State private var justLogged: Exercise?
+    @Environment(\.colorScheme) private var scheme
+    @Environment(\.dismiss) private var dismiss
+
+    var initialExercise: Exercise = .pushUps
+    var initialAmount: Double? = nil
+
+    @State private var exercise: Exercise
+    @State private var amount: Double
+    @State private var postToFeed: Bool = true
+    @State private var justLogged: Bool = false
+
+    init(initialExercise: Exercise = .pushUps, initialAmount: Double? = nil) {
+        self.initialExercise = initialExercise
+        self.initialAmount = initialAmount
+        _exercise = State(initialValue: initialExercise)
+        _amount = State(initialValue: initialAmount ?? initialExercise.defaultAmount)
+    }
 
     var body: some View {
         ZStack {
-            Color.movoBackground.ignoresSafeArea()
+            scheme.movoBackground.ignoresSafeArea()
 
-            ScrollView {
-                VStack(spacing: 20) {
-                    Text("LOG A WORKOUT")
-                        .font(.movoHeader(30))
-                        .foregroundStyle(Color.movoTextPrimary)
-                        .padding(.top, 24)
+            VStack(spacing: 0) {
+                header
 
-                    VStack(spacing: 14) {
-                        ForEach(Exercise.allCases) { exercise in
-                            ExerciseRow(
-                                exercise: exercise,
-                                amount: amounts[exercise, default: exercise.unit == .minutes ? 10 : 15],
-                                justLogged: justLogged == exercise,
-                                onAmountChange: { amounts[exercise] = $0 },
-                                onLog: { amount in
-                                    store.logWorkout(exercise: exercise, amount: amount)
-                                    justLogged = exercise
-                                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                                        if justLogged == exercise { justLogged = nil }
-                                    }
-                                }
-                            )
-                        }
-                    }
-                    .padding(.horizontal, 20)
+                ScrollView {
+                    VStack(spacing: 20) {
+                        exerciseGrid
+                        amountStepper
+                        pointsPreview
 
-                    if !store.workoutLog.isEmpty {
-                        VStack(alignment: .leading, spacing: 10) {
-                            Text("RECENT")
-                                .font(.movoMono(12, weight: .semibold))
-                                .foregroundStyle(Color.movoTextSecondary)
-                                .padding(.horizontal, 20)
-
-                            VStack(spacing: 8) {
-                                ForEach(store.workoutLog.prefix(6)) { entry in
-                                    HStack {
-                                        Image(systemName: entry.exercise.symbolName)
-                                            .foregroundStyle(Color.movoSteel)
-                                        Text("\(entry.amount) \(entry.exercise.displayName)")
-                                            .font(.movoMono(13))
-                                            .foregroundStyle(Color.movoTextPrimary)
-                                        Spacer()
-                                        Text("+\(entry.points)")
-                                            .font(.movoMono(13, weight: .bold))
-                                            .foregroundStyle(Color.movoVolt)
-                                    }
-                                    .padding(.horizontal, 12)
-                                    .padding(.vertical, 8)
-                                    .background(Color.movoPanel)
-                                    .overlay(Rectangle().strokeBorder(Color.movoPanelBorder))
-                                }
+                        RoundedCard {
+                            Toggle(isOn: $postToFeed) {
+                                Text("Post a photo to the crew feed")
+                                    .font(.movoBody(14, weight: .medium))
+                                    .foregroundStyle(scheme.movoTextPrimary)
                             }
-                            .padding(.horizontal, 20)
+                            .tint(store.character.accent.color)
                         }
-                        .padding(.bottom, 32)
                     }
+                    .padding(.horizontal, MovoMetrics.screenPadding)
+                    .padding(.bottom, 16)
+                }
+
+                MovoPillButton(
+                    title: justLogged ? "Logged +\(store.pointsForExercise(exercise, amount: amount)) pts" : "Log it",
+                    accent: store.character.accent.color,
+                    isEnabled: amount > 0,
+                    action: logIt
+                )
+                .padding(.horizontal, MovoMetrics.screenPadding)
+                .padding(.bottom, 20)
+            }
+        }
+    }
+
+    private var header: some View {
+        HStack {
+            Text("Log a workout")
+                .font(.movoDisplay(20))
+                .foregroundStyle(scheme.movoTextPrimary)
+            Spacer()
+            Button { dismiss() } label: {
+                Image(systemName: "xmark")
+                    .font(.system(size: 15, weight: .semibold))
+                    .foregroundStyle(scheme.movoTextSecondary)
+                    .padding(8)
+                    .background(Circle().fill(scheme.movoSurfaceAlt))
+            }
+        }
+        .padding(.horizontal, MovoMetrics.screenPadding)
+        .padding(.top, 18)
+        .padding(.bottom, 12)
+    }
+
+    private var exerciseGrid: some View {
+        let columns = [GridItem(.flexible(), spacing: 12), GridItem(.flexible(), spacing: 12)]
+        return LazyVGrid(columns: columns, spacing: 12) {
+            ForEach(Exercise.allCases) { ex in
+                Button {
+                    exercise = ex
+                    amount = ex.defaultAmount
+                    justLogged = false
+                } label: {
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text(ex.displayName)
+                            .font(.movoBody(14, weight: .semibold))
+                            .foregroundStyle(exercise == ex ? Color.black.opacity(0.85) : scheme.movoTextPrimary)
+                        Text(ex.weightLabel)
+                            .font(.movoBody(11))
+                            .foregroundStyle(exercise == ex ? Color.black.opacity(0.6) : scheme.movoTextSecondary)
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(14)
+                    .background(
+                        RoundedRectangle(cornerRadius: MovoMetrics.smallRadius, style: .continuous)
+                            .fill(exercise == ex ? store.character.accent.color : scheme.movoSurface)
+                    )
+                    .overlay(
+                        RoundedRectangle(cornerRadius: MovoMetrics.smallRadius, style: .continuous)
+                            .strokeBorder(exercise == ex ? Color.clear : scheme.movoBorder, lineWidth: 1)
+                    )
+                }
+                .buttonStyle(.plain)
+            }
+        }
+    }
+
+    private var amountStepper: some View {
+        RoundedCard {
+            SectionHeading(title: "How many")
+            HStack {
+                stepButton(symbol: "minus") {
+                    amount = max(exercise.step, amount - exercise.step)
+                    justLogged = false
+                }
+
+                Spacer()
+                VStack(spacing: 2) {
+                    Text(amountLabel)
+                        .font(.movoDisplay(36))
+                        .foregroundStyle(scheme.movoTextPrimary)
+                    Text(exercise.kind == .dist ? "km" : (exercise.kind == .reps ? "reps" : "seconds"))
+                        .font(.movoBody(12))
+                        .foregroundStyle(scheme.movoTextSecondary)
+                }
+                Spacer()
+
+                stepButton(symbol: "plus", filled: true) {
+                    amount += exercise.step
+                    justLogged = false
                 }
             }
         }
     }
-}
 
-private struct ExerciseRow: View {
-    var exercise: Exercise
-    var amount: Int
-    var justLogged: Bool
-    var onAmountChange: (Int) -> Void
-    var onLog: (Int) -> Void
+    private func stepButton(symbol: String, filled: Bool = false, action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            Image(systemName: symbol)
+                .font(.system(size: 16, weight: .bold))
+                .foregroundStyle(filled ? .black.opacity(0.85) : scheme.movoTextPrimary)
+                .frame(width: 44, height: 44)
+                .background(Circle().fill(filled ? store.character.accent.color : scheme.movoSurfaceAlt))
+        }
+    }
 
-    var body: some View {
-        BracketPanel(accent: justLogged ? .movoVolt : .movoSteel) {
-            HStack(spacing: 14) {
-                Image(systemName: exercise.symbolName)
-                    .font(.system(size: 22))
-                    .foregroundStyle(Color.movoSteel)
-                    .frame(width: 32)
+    private var amountLabel: String {
+        exercise.kind == .dist ? String(format: "%.1f", amount) : "\(Int(amount))"
+    }
 
-                VStack(alignment: .leading, spacing: 2) {
-                    Text(exercise.displayName.uppercased())
-                        .font(.movoMono(14, weight: .semibold))
-                        .foregroundStyle(Color.movoTextPrimary)
-                    Text("\(exercise.pointsPerUnit) pt / \(exercise.unit.shortLabel)")
-                        .font(.movoMono(11))
-                        .foregroundStyle(Color.movoTextSecondary)
-                }
-
+    private var pointsPreview: some View {
+        let pts = store.pointsForExercise(exercise, amount: amount)
+        let willReachNext = store.character.totalPoints + pts >= (store.character.stage.next?.threshold ?? Int.max)
+        return RoundedCard {
+            HStack {
+                Text("You'll earn")
+                    .font(.movoBody(13))
+                    .foregroundStyle(scheme.movoTextSecondary)
                 Spacer()
-
-                Stepper(value: Binding(get: { amount }, set: onAmountChange), in: 1...200) {
-                    Text("\(amount) \(exercise.unit.shortLabel)")
-                        .font(.movoMono(13, weight: .bold))
-                        .foregroundStyle(Color.movoTextPrimary)
-                        .frame(minWidth: 60)
-                }
-                .labelsHidden()
-                .fixedSize()
+                Text("+\(pts) pts")
+                    .font(.movoDisplay(20))
+                    .foregroundStyle(Color.movoLime)
             }
-
-            Button {
-                onLog(amount)
-            } label: {
-                Text(justLogged ? "LOGGED +\(exercise.points(for: amount))" : "LOG \(exercise.points(for: amount)) PTS")
-                    .font(.movoMono(13, weight: .bold))
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 10)
-                    .background(justLogged ? Color.movoVolt.opacity(0.3) : Color.movoVolt)
-                    .foregroundStyle(Color.black)
+            Text("points = amount × weight × streak bonus × multiplier")
+                .font(.movoBody(11))
+                .foregroundStyle(scheme.movoTextSecondary)
+            if willReachNext, let next = store.character.stage.next {
+                Text("Enough to push \(store.character.name.isEmpty ? "your Movo" : store.character.name) to \(next.displayName).")
+                    .font(.movoBody(12, weight: .semibold))
+                    .foregroundStyle(Color.movoLime)
             }
-            .padding(.top, 12)
+        }
+    }
+
+    private func logIt() {
+        _ = store.logWorkout(exercise: exercise, amount: amount, postToFeed: postToFeed)
+        justLogged = true
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+            dismiss()
         }
     }
 }

@@ -8,7 +8,6 @@ struct MovoApp: App {
         WindowGroup {
             RootView()
                 .environmentObject(store)
-                .preferredColorScheme(.dark)
         }
     }
 }

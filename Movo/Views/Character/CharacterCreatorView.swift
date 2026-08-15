@@ -2,98 +2,98 @@ import SwiftUI
 
 struct CharacterCreatorView: View {
     @EnvironmentObject var store: AppStore
+    @Environment(\.colorScheme) private var scheme
 
     @State private var name: String = ""
-    @State private var bodyColorHex: String = "#3DDC97"
-    @State private var outfitColorHex: String = "#FF6B5E"
-
-    private let bodyColorOptions = ["#3DDC97", "#5B8DEF", "#C6FF00", "#FF6B5E", "#E8E8EC"]
-    private let outfitColorOptions = ["#FF6B5E", "#C6FF00", "#5B8DEF", "#1A1A1E", "#E8E8EC"]
+    @State private var accent: AccentOption = .lime
 
     var body: some View {
         ZStack {
-            Color.movoBackground.ignoresSafeArea()
+            scheme.movoBackground.ignoresSafeArea()
 
             ScrollView {
-                VStack(spacing: 24) {
-                    Text("BUILD YOUR MOVO")
-                        .font(.movoHeader(34))
-                        .foregroundStyle(Color.movoVolt)
-                        .padding(.top, 32)
+                VStack(alignment: .leading, spacing: 20) {
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("Meet your Movo")
+                            .font(.movoDisplay(30))
+                            .foregroundStyle(scheme.movoTextPrimary)
+                        Text("It starts as an egg. You decide what it becomes.")
+                            .font(.movoBody(14))
+                            .foregroundStyle(scheme.movoTextSecondary)
+                    }
+                    .padding(.top, 24)
 
-                    CharacterShapeView(
-                        bodyColor: Color(hex: bodyColorHex),
-                        outfitColor: Color(hex: outfitColorHex),
-                        stage: .rookie,
-                        growthScale: 1.0
-                    )
-                    .frame(height: 240)
+                    RoundedCard {
+                        HStack {
+                            Spacer()
+                            EggShape()
+                                .fill(
+                                    LinearGradient(colors: [accent.color.lighter(by: 0.2), accent.color.darker(by: 0.08)],
+                                                   startPoint: .top, endPoint: .bottom)
+                                )
+                                .frame(width: 130, height: 164)
+                                .overlay(alignment: .center) {
+                                    VStack(spacing: 10) {
+                                        Rectangle().fill(accent.color.lighter(by: 0.4)).frame(width: 40, height: 5)
+                                        Rectangle().fill(accent.color.lighter(by: 0.4)).frame(width: 26, height: 5).offset(x: 12)
+                                    }
+                                }
+                            Spacer()
+                        }
+                        .padding(.vertical, 12)
+                    }
 
-                    BracketPanel {
-                        VStack(alignment: .leading, spacing: 20) {
-                            VStack(alignment: .leading, spacing: 8) {
-                                Text("NAME")
-                                    .font(.movoMono(12, weight: .semibold))
-                                    .foregroundStyle(Color.movoTextSecondary)
-                                TextField("", text: $name, prompt: Text("e.g. Blaze").foregroundStyle(Color.movoTextSecondary))
-                                    .font(.movoMono(18))
-                                    .foregroundStyle(Color.movoTextPrimary)
-                                    .padding(10)
-                                    .background(Color.movoBackground)
-                                    .overlay(Rectangle().strokeBorder(Color.movoPanelBorder))
+                    VStack(alignment: .leading, spacing: 8) {
+                        SectionHeading(title: "Name")
+                        TextField("", text: $name, prompt: Text("e.g. Bibo").foregroundStyle(scheme.movoTextSecondary))
+                            .font(.movoBody(17, weight: .semibold))
+                            .foregroundStyle(scheme.movoTextPrimary)
+                            .padding(14)
+                            .background(RoundedRectangle(cornerRadius: MovoMetrics.smallRadius, style: .continuous).fill(scheme.movoSurface))
+                            .overlay(RoundedRectangle(cornerRadius: MovoMetrics.smallRadius, style: .continuous).strokeBorder(Color.movoLime, lineWidth: 2))
+                    }
+
+                    VStack(alignment: .leading, spacing: 8) {
+                        SectionHeading(title: "Color")
+                        HStack(spacing: 14) {
+                            ForEach(AccentOption.allCases) { option in
+                                Circle()
+                                    .fill(option.color)
+                                    .frame(width: 40, height: 40)
+                                    .overlay(
+                                        Circle().strokeBorder(scheme.movoTextPrimary, lineWidth: accent == option ? 3 : 0)
+                                    )
+                                    .overlay(
+                                        Circle().strokeBorder(scheme.movoBorder, lineWidth: 1)
+                                    )
+                                    .onTapGesture { accent = option }
                             }
-
-                            ColorSwatchPicker(title: "BODY COLOR", options: bodyColorOptions, selection: $bodyColorHex)
-                            ColorSwatchPicker(title: "OUTFIT COLOR", options: outfitColorOptions, selection: $outfitColorHex)
                         }
                     }
-                    .padding(.horizontal, 20)
 
-                    Button {
-                        store.createCharacter(name: name.trimmingCharacters(in: .whitespaces), bodyColorHex: bodyColorHex, outfitColorHex: outfitColorHex)
-                    } label: {
-                        Text("ENTER THE GYM")
-                            .font(.movoHeader(20))
-                            .frame(maxWidth: .infinity)
-                            .padding(.vertical, 14)
-                            .background(canCreate ? Color.movoVolt : Color.movoPanelBorder)
-                            .foregroundStyle(Color.black)
-                    }
-                    .disabled(!canCreate)
-                    .padding(.horizontal, 20)
-                    .padding(.bottom, 32)
+                    MovoPillButton(
+                        title: name.trimmingCharacters(in: .whitespaces).isEmpty ? "Hatch your Movo" : "Hatch \(name.trimmingCharacters(in: .whitespaces))",
+                        accent: .movoLime,
+                        isEnabled: canCreate,
+                        action: {
+                            store.createCharacter(name: name.trimmingCharacters(in: .whitespaces), accent: accent)
+                        }
+                    )
+                    .padding(.top, 8)
+
+                    Text("No account. Your crew is everyone on this demo.")
+                        .font(.movoBody(11))
+                        .foregroundStyle(scheme.movoTextSecondary)
+                        .frame(maxWidth: .infinity, alignment: .center)
                 }
+                .padding(.horizontal, MovoMetrics.screenPadding)
+                .padding(.bottom, 32)
             }
         }
     }
 
     private var canCreate: Bool {
         !name.trimmingCharacters(in: .whitespaces).isEmpty
-    }
-}
-
-private struct ColorSwatchPicker: View {
-    var title: String
-    var options: [String]
-    @Binding var selection: String
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text(title)
-                .font(.movoMono(12, weight: .semibold))
-                .foregroundStyle(Color.movoTextSecondary)
-            HStack(spacing: 12) {
-                ForEach(options, id: \.self) { hex in
-                    Circle()
-                        .fill(Color(hex: hex))
-                        .frame(width: 32, height: 32)
-                        .overlay(
-                            Circle().strokeBorder(Color.movoVolt, lineWidth: selection == hex ? 3 : 0)
-                        )
-                        .onTapGesture { selection = hex }
-                }
-            }
-        }
     }
 }
 
