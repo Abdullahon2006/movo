@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="284" height="322" viewBox="0 0 284 322">
+  <title>Movo — sulking mood</title>
+  <g transform="translate(24.00 24.00) scale(1.1800)">
+  <defs>
+  <linearGradient id="gradHead" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#DAE5BF"/>
+    <stop offset="1" stop-color="#CAD6AB"/>
+  </linearGradient>
+  <linearGradient id="gradTorso" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#D8E3BE"/>
+    <stop offset="1" stop-color="#C8D4A9"/>
+  </linearGradient>
+  </defs>
+  <g id="legs">
+  <rect x="59.00" y="190.00" width="34.00" height="20.00" rx="10.00" fill="#F3F4F0" stroke="#000000" stroke-width="1" stroke-opacity="0.08"/>
+  <rect x="107.00" y="190.00" width="34.00" height="20.00" rx="10.00" fill="#F3F4F0" stroke="#000000" stroke-width="1" stroke-opacity="0.08"/>
+  </g>
+  <g id="arms">
+  <rect x="16.00" y="92.00" width="30.00" height="64.00" rx="15.00" fill="#D3DFB4" transform="rotate(-14.00 31.00 92.00)"/>
+  <rect x="154.00" y="92.00" width="30.00" height="64.00" rx="15.00" fill="#D3DFB4" transform="rotate(14.00 169.00 92.00)"/>
+  </g>
+  <g id="torso">
+  <rect x="46.00" y="92.00" width="108.00" height="96.00" rx="34.00" fill="url(#gradTorso)"/>
+  </g>
+  <g id="tank_top">
+  <rect x="78.00" y="103.00" width="44.00" height="66.00" rx="14.00" fill="#8F9879"/>
+  </g>
+  <g id="head">
+  <circle cx="100.00" cy="58.00" r="59.00" fill="url(#gradHead)"/>
+  </g>
+  <g id="face">
+  <circle cx="85.00" cy="56.00" r="4.00" fill="#000000" fill-opacity="0.7"/>
+  <circle cx="115.00" cy="56.00" r="4.00" fill="#000000" fill-opacity="0.7"/>
+  <path d="M 89.00,86.00 Q 100.00,76.00 111.00,86.00" fill="none" stroke="#000000" stroke-width="3.50" stroke-opacity="0.7" stroke-linecap="round"/>
+  <path d="M 80.00,58.50 Q 83.50,60.15 83.50,65.10 A 3.50,3.50 0 0 1 76.50,65.10 Q 76.50,60.15 80.00,58.50 Z" fill="#57B4FF"/>
+  </g>
+  <g id="headband">
+  <rect x="46.00" y="4.00" width="108.00" height="16.00" rx="8.00" fill="#FFB13D"/>
+  </g>
+  </g>
+</svg>
