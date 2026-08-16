@@ -70,20 +70,26 @@ private struct MovoTabBar: View {
 
     var body: some View {
         HStack(spacing: 0) {
-            tabButton(.movo, label: "Movo") { shape in
-                RoundedRectangle(cornerRadius: 5, style: .continuous)
-                    .fill(shape)
-                    .frame(width: 16, height: 16)
+            tabButton(.movo, label: "Movo") { isSelected, style in
+                Image(systemName: isSelected ? "figure.run.square.stack.fill" : "figure.run.square.stack")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 22, height: 22)
+                    .foregroundStyle(style)
             }
-            tabButton(.crew, label: "Crew") { shape in
-                RoundedRectangle(cornerRadius: 5, style: .continuous)
-                    .strokeBorder(shape, lineWidth: 2)
-                    .frame(width: 16, height: 16)
+            tabButton(.crew, label: "Crew") { isSelected, style in
+                Image(systemName: isSelected ? "person.3.fill" : "person.3")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 26, height: 22)
+                    .foregroundStyle(style)
             }
-            tabButton(.health, label: "Health") { shape in
-                Circle()
-                    .strokeBorder(shape, lineWidth: 2)
-                    .frame(width: 16, height: 16)
+            tabButton(.health, label: "Health") { isSelected, style in
+                Image(systemName: isSelected ? "heart.fill" : "heart")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 22, height: 22)
+                    .foregroundStyle(style)
             }
         }
         .padding(.top, 10)
@@ -94,16 +100,17 @@ private struct MovoTabBar: View {
         )
     }
 
-    private func tabButton<Shape: View>(_ value: MovoTab, label: String, @ViewBuilder icon: @escaping (AnyShapeStyle) -> Shape) -> some View {
+    private func tabButton<V: View>(_ value: MovoTab, label: String, @ViewBuilder icon: @escaping (Bool, AnyShapeStyle) -> V) -> some View {
         let isSelected = selected == value
+        let color = isSelected ? accent : scheme.movoTextSecondary
         return Button {
             selected = value
         } label: {
             VStack(spacing: 4) {
-                icon(AnyShapeStyle(isSelected ? accent : scheme.movoTextSecondary))
+                icon(isSelected, AnyShapeStyle(color))
                 Text(label)
                     .font(.movoBody(10, weight: .semibold))
-                    .foregroundStyle(isSelected ? accent : scheme.movoTextSecondary)
+                    .foregroundStyle(color)
             }
             .frame(maxWidth: .infinity)
         }

@@ -5,10 +5,7 @@ struct CrewFeedView: View {
     @Environment(\.colorScheme) private var scheme
 
     var body: some View {
-        ZStack {
-            scheme.movoBackground.ignoresSafeArea()
-
-            ScrollView {
+        ScrollView {
                 VStack(spacing: 14) {
                     header
 
@@ -30,7 +27,7 @@ struct CrewFeedView: View {
                 .padding(.top, 16)
                 .padding(.bottom, 32)
             }
-        }
+            .background(scheme.movoBackground.ignoresSafeArea())
         .onAppear { store.startSimulatedCrewActivity() }
         .onDisappear { store.stopSimulatedCrewActivity() }
     }
@@ -124,6 +121,14 @@ private struct FeedPostCard: View {
                 RoundedRectangle(cornerRadius: MovoMetrics.smallRadius, style: .continuous)
                     .fill(Color.black.opacity(0.85))
                     .frame(height: 160)
+                    .overlay {
+                        CharacterShapeView(
+                            accent: Color(hex: post.authorColorHex),
+                            stage: .rookie
+                        )
+                        .scaleEffect(0.45)
+                        .offset(y: 10)
+                    }
                     .overlay(alignment: .topLeading) {
                         Text("front camera — mid-\(post.detail.split(separator: " ").last ?? "set")")
                             .font(.movoBody(9))
@@ -134,6 +139,7 @@ private struct FeedPostCard: View {
                         AvatarBubble(name: post.authorName, colorHex: post.authorColorHex, size: 34)
                             .padding(8)
                     }
+                    .clipped()
             }
 
             if post.kind != .liveSession {

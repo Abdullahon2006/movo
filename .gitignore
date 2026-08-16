@@ -8,7 +8,7 @@
 .DS_Store
 ## User settings
 xcuserdata/
-
+build/
 ## Obj-C/Swift specific
 *.hmap
 

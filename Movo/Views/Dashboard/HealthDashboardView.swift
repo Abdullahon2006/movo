@@ -6,10 +6,7 @@ struct HealthDashboardView: View {
     private let snapshot = HealthSnapshot.mock
 
     var body: some View {
-        ZStack {
-            scheme.movoBackground.ignoresSafeArea()
-
-            ScrollView {
+        ScrollView {
                 VStack(spacing: 16) {
                     Text("Health")
                         .font(.movoDisplay(28))
@@ -20,10 +17,10 @@ struct HealthDashboardView: View {
                     MovoBanner(icon: "heart.text.square", text: "Sample data. Connects to Apple Health / Google Fit in the full version.", tint: .movoAmber)
 
                     LazyVGrid(columns: [GridItem(.flexible(), spacing: 12), GridItem(.flexible(), spacing: 12)], spacing: 12) {
-                        heartRateCard
-                        sleepCard
-                        screenTimeCard
-                        waterCard
+                        heartRateCard.frame(height: 160)
+                        sleepCard.frame(height: 160)
+                        screenTimeCard.frame(height: 160)
+                        waterCard.frame(height: 160)
                     }
 
                     weeklyCheckIn
@@ -31,7 +28,7 @@ struct HealthDashboardView: View {
                 .padding(.horizontal, MovoMetrics.screenPadding)
                 .padding(.bottom, 32)
             }
-        }
+            .background(scheme.movoBackground.ignoresSafeArea())
     }
 
     private var heartRateCard: some View {

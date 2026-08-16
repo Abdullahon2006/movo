@@ -10,10 +10,7 @@ struct CharacterHomeView: View {
     private var mood: Mood { store.mood }
 
     var body: some View {
-        ZStack {
-            scheme.movoBackground.ignoresSafeArea()
-
-            ScrollView {
+        ScrollView {
                 VStack(spacing: 18) {
                     header
                         .padding(.top, 16)
@@ -33,7 +30,7 @@ struct CharacterHomeView: View {
                 .padding(.horizontal, MovoMetrics.screenPadding)
                 .padding(.bottom, 32)
             }
-        }
+            .background(scheme.movoBackground.ignoresSafeArea())
         .sheet(isPresented: $showWardrobe) { WardrobeView() }
         .sheet(isPresented: $showSettings) { SettingsView() }
     }

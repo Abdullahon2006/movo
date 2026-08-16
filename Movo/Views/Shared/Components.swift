@@ -14,6 +14,7 @@ struct RoundedCard<Content: View>: View {
             content
         }
         .padding(padding)
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         .background(
             RoundedRectangle(cornerRadius: MovoMetrics.cardRadius, style: .continuous)
                 .fill(scheme.movoSurface)
